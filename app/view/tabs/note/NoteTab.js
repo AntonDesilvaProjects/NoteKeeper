@@ -1,4 +1,4 @@
-Ext.define('NoteKeeper.view.tab.NoteTab', {
+Ext.define('NoteKeeper.view.tabs.note.NoteTab', {
 	extend : 'Ext.panel.Panel',
 	requires : [
 	],

@@ -1,4 +1,4 @@
-Ext.define('NoteKeeper.store.widget.CategoryPieChartStore', {
+Ext.define('NoteKeeper.store.tabs.categorystatistic.CategoryPieChartStore', {
 	extend : 'Ext.data.Store',
 	storeId : 'categoryPieChartStore',
 	fields : [

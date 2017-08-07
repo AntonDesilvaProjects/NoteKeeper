@@ -1,4 +1,4 @@
-Ext.define('NoteKeeper.model.widget.EditableCategoryModel', {
+Ext.define('NoteKeeper.model.tabs.categorystatistic.EditableCategoryModel', {
 	extend : 'Ext.data.Model',
 	fields : [
 		{

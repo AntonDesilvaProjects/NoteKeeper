@@ -1,4 +1,4 @@
-Ext.define('NoteKeeper.model.ContentGridModel', {
+Ext.define('NoteKeeper.model.tabs.ContentGridModel', {
 	extend : 'Ext.data.Model',
 	fields : [
 		{

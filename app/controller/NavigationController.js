@@ -5,9 +5,9 @@ Ext.define('NoteKeeper.controller.NavigationController', {
 	extend : 'Ext.app.ViewController',
 	alias : 'controller.navController',
 	requires : [
-		'NoteKeeper.view.ContentGridView',
-		'NoteKeeper.store.ContentGridViewStore',
-		'NoteKeeper.view.tabs.CategoryStatisticTab'
+		'NoteKeeper.view.tabs.ContentGridView',
+		'NoteKeeper.store.tabs.ContentGridViewStore',
+		'NoteKeeper.view.tabs.categorystatistic.CategoryStatisticTab'
 	],
 	init : function()
 	{
@@ -68,10 +68,9 @@ Ext.define('NoteKeeper.controller.NavigationController', {
 				if( node.get('panelId') === 'journal' || node.get('panelId') === 'note' )
 				{	
 					tab.xtype = node.get('panelClass');
-					tab.store = Ext.create('NoteKeeper.store.ContentGridViewStore',{
+					tab.store = Ext.create('NoteKeeper.store.tabs.ContentGridViewStore',{
 						type : node.get('panelId')
 					});
-
 				}
 				else
 					tab.xtype = 'categoryStatisticTab';

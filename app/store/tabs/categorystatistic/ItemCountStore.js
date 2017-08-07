@@ -1,4 +1,4 @@
-Ext.define('NoteKeeper.store.widget.ItemCountStore', {
+Ext.define('NoteKeeper.store.tabs.categorystatistic.ItemCountStore', {
 	extend : 'Ext.data.Store',
 	storeId : 'itemCountStore',
 	fields : [

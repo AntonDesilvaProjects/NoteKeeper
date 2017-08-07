@@ -46,14 +46,18 @@ var gridTpl = new Ext.XTemplate(
 	}
 );
 
-Ext.define('NoteKeeper.view.ContentGridView', {
+Ext.define('NoteKeeper.view.tabs.ContentGridView', {
 	extend : 'Ext.view.View',
 	requires : [
-		'NoteKeeper.store.ContentGridViewStore'
+		'NoteKeeper.store.tabs.ContentGridViewStore',
+		'NoteKeeper.controller.tabs.ContentGridViewController'
 	],
 	xtype : 'contentGridView',
-	//store : Ext.create('NoteKeeper.store.ContentGridViewStore'), //Create a new store for this view
 	tpl : gridTpl,
-	itemSelector : 'card',
-	autoScroll : true
+	itemSelector : 'div.card',
+	controller : 'contentGridViewController',
+	autoScroll : true,
+	listeners : {
+		itemclick : 'onItemClick'
+	}
 });

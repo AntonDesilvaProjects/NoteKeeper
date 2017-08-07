@@ -1,7 +1,7 @@
-Ext.define('NoteKeeper.store.ContentGridViewStore', {
+Ext.define('NoteKeeper.store.tabs.ContentGridViewStore', {
 	extend : 'Ext.data.Store',
 	storeId : 'contentGridViewStore',
-	model : 'NoteKeeper.model.ContentGridModel',
+	model : 'NoteKeeper.model.tabs.ContentGridModel',
 	type : null,
 	proxy : {
 		type : 'ajax',

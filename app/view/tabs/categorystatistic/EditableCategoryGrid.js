@@ -1,7 +1,7 @@
-Ext.define('NoteKeeper.view.widget.EditableCategoryGrid', {
+Ext.define('NoteKeeper.view.tabs.categorystatistic.EditableCategoryGrid', {
 	extend : 'Ext.grid.Panel',
 	requires : [
-		'NoteKeeper.store.widget.EditableCategoryGridStore',
+		'NoteKeeper.store.tabs.categorystatistic.EditableCategoryGridStore',
 		'Ext.grid.plugin.RowEditing'
 	],
 	xtype : 'editableCategoryGrid',
