@@ -111,6 +111,10 @@
         {
             "path": "app.js",
             "bundle": true
+        },
+        {
+            "path" : "resources/lib/tinymce/tinymce.min.js",
+            "includeInBundle" : true
         }
     ],
 

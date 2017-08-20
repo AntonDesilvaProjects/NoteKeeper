@@ -4,7 +4,7 @@ Ext.define('NoteKeeper.view.tabs.note.EditNoteWindow', {
 		'NoteKeeper.view.tabs.Editor'
 	],
 	xtype : 'editNoteWindow',
-	height : 400,
+	height : 500,
 	width : 500,
 	autoShow : true,
 	layout : {
@@ -15,6 +15,9 @@ Ext.define('NoteKeeper.view.tabs.note.EditNoteWindow', {
 		{
 			xtype : 'contentEditor',
 			width : '100%'
+		},
+		{
+			
 		}
 	],
 	intiComponent : function()

@@ -55,5 +55,11 @@ Ext.define('NoteKeeper.view.tabs.categorystatistic.EditableCategoryGrid', {
 	{
 		this.callParent(arguments);
 
+	},
+	listeners : {
+		beforeselect : function()
+		{
+			alert('hey')
+		}
 	}
 });
