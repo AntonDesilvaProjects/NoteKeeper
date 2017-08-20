@@ -1,11 +1,11 @@
 Ext.define('NoteKeeper.view.tabs.note.EditNoteWindow', {
 	extend : 'Ext.window.Window',
 	requires : [
-		'NoteKeeper.view.tabs.Editor'
+		'NoteKeeper.view.tabs.note.NoteEditor'
 	],
 	xtype : 'editNoteWindow',
 	height : 500,
-	width : 500,
+	width : 545,
 	autoShow : true,
 	layout : {
 		type : 'vbox'
@@ -13,7 +13,7 @@ Ext.define('NoteKeeper.view.tabs.note.EditNoteWindow', {
 	title : 'Go get Sushi',
 	items : [
 		{
-			xtype : 'contentEditor',
+			xtype : 'noteEditor',
 			width : '100%'
 		},
 		{

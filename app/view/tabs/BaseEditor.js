@@ -6,13 +6,13 @@
 	c) Syntax highlighting for code
 	d) Mathematical expression + music notation
 */
-Ext.define('NoteKeeper.view.tabs.Editor', {
+Ext.define('NoteKeeper.view.tabs.BaseEditor', {
 	extend : 'Ext.panel.Panel',
 	requires : [
-		'NoteKeeper.controller.tabs.EditorController'
+		'NoteKeeper.controller.tabs.BaseEditorController'
 	],
-	xtype : 'contentEditor',
-	controller : 'editorController',
+	xtype : 'baseEditor',
+	controller : 'baseEditorController',
 	listeners : {
 		afterrender : 'afterEditorRender'
 	},
