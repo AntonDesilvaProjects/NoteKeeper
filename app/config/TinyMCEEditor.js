@@ -2,7 +2,7 @@ Ext.define('NoteKeeper.config.TinyMCEEditor', {
 	singleton : true,
 	/*
 		This is the tinyMCE editor configuration for the Notes editor. Includes
-		mostly complete set of tool bars/options for editing.
+		a complete set of toolbars/options for editing.
 	*/
 	NOTE_EDITOR : {
 		toolbar_items_size : 'small',
@@ -20,8 +20,8 @@ Ext.define('NoteKeeper.config.TinyMCEEditor', {
 		font_formats: 'Arial=arial,helvetica,sans-serif;Courier New=courier new,courier,monospace;AkrutiKndPadmini=Akpdmi-n',
 	},
 	/*
-		This is the tinyMCE editor configuration for the journals editor. Editing capabilites
-		doesn't have to be as complete as the Note editor. Hence less toolbar & menu options
+		This is the tinyMCE editor configuration for the Journals editor. Editing capabilites
+		doesn't have to be as complete as the Note editor. Hence less toolbar & menu options.
 	*/
 	JOURNAL_EDITOR : {
 		toolbar_items_size : 'small',
