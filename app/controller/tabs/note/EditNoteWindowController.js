@@ -21,6 +21,9 @@ Ext.define('NoteKeeper.controller.tabs.note.EditNoteWindowController',{
 				x : button.getX(),
 				y : button.getY() + button.getHeight()
 			});
+		else
+			this.attachmentPanel.setPosition(  button.getX(), button.getY() + button.getHeight() );
+	
 		this.attachmentPanel.show();
 	},
 	onAttachmentPanelBlur : function()
