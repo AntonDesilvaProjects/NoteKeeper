@@ -15,7 +15,7 @@ Ext.define('NoteKeeper.view.NavigationPanel', {
 	
 	initComponent : function()
 	{
-		console.log( this.store );
+		console.info( this.store );
 		this.callParent( arguments );
 	}
 });

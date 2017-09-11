@@ -30,6 +30,14 @@ Ext.define('NoteKeeper.controller.tabs.BaseEditorController', {
 		config.save_onsavecallback =  function() {
             me.onSaveContent();
         };
+        //We can add event listeners here for editor events
+        config.setup = function( editor ){
+        	//Fires when the editor is initialized
+        	editor.on('init', function(e){ 
+        		me.onEditorInit(e,me); //Call this class's function when initialized;
+        							   //'e' is event. 'me' is this class's scope so we can access its functions
+        	});
+        }
         console.log( config );
 		tinymce.init( config );
 	},
@@ -40,5 +48,19 @@ Ext.define('NoteKeeper.controller.tabs.BaseEditorController', {
 	onSaveContent : function()
 	{
 		console.info( this.editor.tinyMceEditorId + ' : ' + tinyMCE.get( 'tinyMceEditor-' + this.editor.tinyMceEditorId).getContent() );
+	},
+	/*
+		Called when the editor initializes.
+	*/
+	onEditorInit : function(e, scope)
+	{
+		//Load any initial content into the editor
+		var initContent = scope.editor.initialContent;
+		if( initContent !== null )
+			scope.getTinyMceEditor().setContent( initContent );
+	},
+	getTinyMceEditor : function()
+	{
+		return tinyMCE.get( 'tinyMceEditor-' + this.editor.tinyMceEditorId );
 	}
 });

@@ -13,7 +13,7 @@ var gridTpl = new Ext.XTemplate(
 				'<tpl for="contentType">',
 					'{[this.generateContentTypeIcon(values)]}',
 				'</tpl>',
-				'<span class="truncate">{category}</span>',
+				'<span class="truncate">{[this.getCategoryList(values)]}</span>',
 				'<i class="fa fa-trash-o trash-icon" aria-hidden="true" title="Delete this note"></i>',
 			'</div>',
 		'</div>',
@@ -26,7 +26,7 @@ var gridTpl = new Ext.XTemplate(
 		*/
 		setBackgroundColor : function( category )
 		{
-			console.log( category );
+			console.info( category );
 			return 'background-color: rgba(223, 224, 2, 0.84) !important';
 		},
 		//Based on the passed in type, generate an icon
@@ -42,6 +42,16 @@ var gridTpl = new Ext.XTemplate(
 				return '<i class="fa fa-music" aria-hidden="true"></i>';
 			else if ( type === "code" )
 				return '<i class="fa fa-code" aria-hidden="true"></i>';
+		},
+		//Generates comma separated list of categories
+		getCategoryList : function( data )
+		{
+			var categoryList = "";
+			Ext.Array.forEach( data.category, function( category ){
+				categoryList += category.name + ",";
+			});
+
+			return categoryList.substring(0, categoryList.length - 1 ).toString();
 		}
 	}
 );

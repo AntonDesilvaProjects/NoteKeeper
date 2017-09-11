@@ -25,7 +25,7 @@ Ext.define('NoteKeeper.view.tabs.FloatingPanel',{
 		var el = cmp.getEl();
 		el.on('mouseleave', this.onMouseLeave, this);
 		el.on('mouseenter', this.onMouseEnter, this);
-		el.on('focusleave', this.onFloatingPanelBlur, this);
+		el.on('blur', this.onFloatingPanelBlur, this);
 
 		this.mouseOut = true;
 	},
@@ -34,7 +34,7 @@ Ext.define('NoteKeeper.view.tabs.FloatingPanel',{
 	*/
 	onMouseEnter : function()
 	{
-		console.log('mouse in')
+		console.info('mouse in')
 		this.mouseOut = false;
 	},
 	/*
@@ -42,7 +42,7 @@ Ext.define('NoteKeeper.view.tabs.FloatingPanel',{
 	*/
 	onMouseLeave : function()
 	{
-		console.log('mouse out')
+		console.info('mouse out')
 		this.mouseOut = true;
 	},
 	/*
@@ -60,7 +60,7 @@ Ext.define('NoteKeeper.view.tabs.FloatingPanel',{
 		var floatingPanels = Ext.ComponentQuery.query('floatingPanel');
 
 		Ext.Array.forEach( floatingPanels, function(cmp){
-			console.log(cmp.id)
+			console.info(cmp.id)
 			if(cmp.id == elId)
 			{
 				cmp.hide();

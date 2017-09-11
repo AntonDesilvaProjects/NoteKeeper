@@ -13,13 +13,19 @@ Ext.define('NoteKeeper.view.tabs.note.EditNoteWindow', {
 	layout : {
 		type : 'vbox'
 	},
-	title : 'Go get Sushi',
+	bind : {
+		title : '{title}'
+	},
 	items : [
 		{
 			xtype : 'noteEditor',
-			width : '100%'
+			width : '100%',
+			bind : {
+				initialContent : '{body}'
+			} 
 		}
 	],
+	//Dock for the Note Editor has: attachments, category, journal, drive integration/email
 	dockedItems : [
 		{
 			xtype : 'toolbar',
@@ -29,33 +35,25 @@ Ext.define('NoteKeeper.view.tabs.note.EditNoteWindow', {
 					text : '1',
 					iconCls : 'fa fa-paperclip fa-lg buttonIcon',
 					handler : 'onAttachmentBtnClick'
-					// handler : function( btn,e, Eopts)
-					// {
-					// 	var a  = Ext.widget('panel', {
-					// 		height : 100,
-					// 		width : 100,
-					// 		floating : true,
-					// 		x : btn.getX(),
-					// 		y : btn.getY() + btn.getHeight(),
-					// 		focusable : true,
-					// 		// items : [
-					// 		// 	{
-					// 		// 		xtype : 'button',
-					// 		// 		text : 'hey'
-					// 		// 	}
-					// 		// ],
-					// 		listeners : {
-					// 			el: {
-					//                 blur: {
-					//                     fn: function(){
-					//                     	a.hide();
-					//                     },
-					//                 }
-     //      						}           
-					// 		}
-					// 	});
-					// 	a.show();
-					// }
+				},
+				{
+					html : '<span style="background-color: yellow;">hobbies</span>,<span style="background-color: orange;">work</span>',
+					maxWidth : 125,
+					handler : 'onCategoryBtnClick'
+				},
+				{
+					text : 'My Hobbies',
+					iconCls : 'fa fa-book fa-lg buttonIcon'
+				},
+				{
+					iconCls : 'fa fa-share-alt fa-lg buttonIcon'
+				},
+				{
+					xtype : 'tbspacer',
+					width : 95
+				},
+				{
+					text : 'Save'
 				}
 			]
 		}

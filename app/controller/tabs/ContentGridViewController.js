@@ -1,7 +1,8 @@
 Ext.define('NoteKeeper.controller.tabs.ContentGridViewController', {
 	extend : 'Ext.app.ViewController',
 	requires : [
-		'NoteKeeper.view.tabs.note.EditNoteWindow'
+		'NoteKeeper.view.tabs.note.EditNoteWindow',
+		'NoteKeeper.model.tabs.EditorViewModel'
 	],
 	alias : 'controller.contentGridViewController',
 	init : function()
@@ -10,6 +11,11 @@ Ext.define('NoteKeeper.controller.tabs.ContentGridViewController', {
 	},
 	onItemClick : function( grid, record, item, index, e, options)
 	{
-		Ext.widget('editNoteWindow');
+		Ext.widget('editNoteWindow', {
+			viewModel : {
+				type : 'editorViewModel',
+				data : record.getData()
+			}
+		});
 	}
 });
