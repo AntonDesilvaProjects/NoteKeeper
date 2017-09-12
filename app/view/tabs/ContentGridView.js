@@ -22,7 +22,7 @@ var gridTpl = new Ext.XTemplate(
 		//Sets the background color of the note
 		/*
 			Have a category-color map loaded from which we can lookup the
-			user's color preferences.
+			user's color preferences. Set the first category's color.
 		*/
 		setBackgroundColor : function( category )
 		{

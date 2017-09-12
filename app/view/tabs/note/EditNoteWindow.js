@@ -37,7 +37,9 @@ Ext.define('NoteKeeper.view.tabs.note.EditNoteWindow', {
 					handler : 'onAttachmentBtnClick'
 				},
 				{
-					html : '<span style="background-color: yellow;">hobbies</span>,<span style="background-color: orange;">work</span>',
+					bind :  {
+						html : '{categoryBtnHtml}',
+					},
 					maxWidth : 125,
 					handler : 'onCategoryBtnClick'
 				},

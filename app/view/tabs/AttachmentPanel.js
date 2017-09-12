@@ -6,7 +6,7 @@ Ext.define('NoteKeeper.view.tabs.AttachmentPanel',{
 	alias : 'widget.attachmentPanel',
 	itemId : 'attachmentPanel',
 	width : 200,
-	height : 150,
+	height : 160,
 	layout : {
 		type : 'vbox',
 		align : 'stretch'
@@ -21,11 +21,22 @@ Ext.define('NoteKeeper.view.tabs.AttachmentPanel',{
 				{
 					text : 'File Name',
 					dataIndex : 'fileName',
-					flex : 2
+					flex : 5
 				},
 				{
-					dataIndex : 'remove',
-					flex : 1
+					xtype : 'actioncolumn',
+					flex : 1,
+					items : [
+						{
+							icon : 'https://cdn4.iconfinder.com/data/icons/colicon/24/close_delete-128.png',
+							tooltip : 'Remove Attachment',
+							handler : function(grid, rowIndex, colIndex)
+							{
+								//Make ajax call to remove the attachment
+								//Visibly remove attachment + ajax call behind the scene
+							}
+						}
+					]
 				}
 			],
 			viewConfig : {
