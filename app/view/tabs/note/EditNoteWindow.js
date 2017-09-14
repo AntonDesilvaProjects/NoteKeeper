@@ -60,8 +60,31 @@ Ext.define('NoteKeeper.view.tabs.note.EditNoteWindow', {
 			]
 		}
 	],
-	intiComponent : function()
-	{
+	listeners : {
+		afterrender : 'afterEditorRender'
+	},
+	initComponent : function()
+	{	
 		this.callParent(arguments);
+	},
+	/*
+		Inline editor is used for editing an elements el.
+	*/
+	getInlineEditor : function()
+	{
+		if(!this.inlineEditor)
+		{
+			this.inlineEditor = Ext.widget('editor',{
+				updateEl : true,
+				alignment: 'l-l',
+			    autoSize: {
+			        width: 'boundEl'
+			    },
+			    field: {
+			        xtype: 'textfield'
+			    }
+			});
+		}
+		return this.inlineEditor;
 	}
 });

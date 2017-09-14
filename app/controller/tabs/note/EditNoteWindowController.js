@@ -7,11 +7,22 @@ Ext.define('NoteKeeper.controller.tabs.note.EditNoteWindowController',{
 	],
 	init : function()
 	{
-		this.control({
-		});
+		// this.control({
+		// 	'editNoteWindow header title' : {
+		// 		dblclick : function(header)
+		// 		{
+		// 			console.log(header);
+		// 		}
+		// 	}
+		// });
 
 		this.editNoteWindow = this.getView();
+		 
 		console.info(this.editNoteWindow)
+	},
+	afterEditorRender : function( editor )
+	{
+		editor.getHeader().getTitle().textEl.on('dblclick', this.onEditorTitleDblClick, this );
 	},
 	onAttachmentBtnClick : function( button, e, eOpts )
 	{
@@ -40,5 +51,12 @@ Ext.define('NoteKeeper.controller.tabs.note.EditNoteWindowController',{
 			this.categoryPanel.setPosition( button.getX(), button.getY() + button.getHeight() );
 
 		this.categoryPanel.show();
+	},
+	/*
+		Use the inline editor to edit the title of the window/note.
+	*/
+	onEditorTitleDblClick : function(e, target)
+	{
+		this.editNoteWindow.getInlineEditor().startEdit( target );
 	}
 });
