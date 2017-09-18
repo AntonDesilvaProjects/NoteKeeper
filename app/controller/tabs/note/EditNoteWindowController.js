@@ -40,12 +40,14 @@ Ext.define('NoteKeeper.controller.tabs.note.EditNoteWindowController',{
 	},
 	onCategoryBtnClick : function( button, e , eOpts )
 	{
+		var me = this;
 		if( !this.categoryPanel )
 			this.categoryPanel = Ext.widget('categoryPanel', {
 				width : 200,
 				height : 150,
 				x : button.getX(),
-				y : button.getY() + button.getHeight()
+				y : button.getY() + button.getHeight(),
+				selectedCategoryIds : me.editNoteWindow.getViewModel().get('selectedCategoryIds')
 			});
 		else
 			this.categoryPanel.setPosition( button.getX(), button.getY() + button.getHeight() );

@@ -11,6 +11,16 @@ Ext.define('NoteKeeper.model.tabs.EditorViewModel',{
 			});
 			html = html.substring( 0, html.length - 2 );
 			return html;
+		},
+		selectedCategoryIds : function( get )
+		{
+			var categories = get('category');
+			var categoryList = [];
+			Ext.Array.forEach( categories, function( category ){
+				categoryList.push( category.categoryId );
+			});
+
+			return categoryList;
 		}
 	}
 });

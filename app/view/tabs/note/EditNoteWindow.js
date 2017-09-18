@@ -44,7 +44,9 @@ Ext.define('NoteKeeper.view.tabs.note.EditNoteWindow', {
 					handler : 'onCategoryBtnClick'
 				},
 				{
-					text : 'My Hobbies',
+					bind : {
+						text : '{journal}',
+					},
 					iconCls : 'fa fa-book fa-lg buttonIcon'
 				},
 				{

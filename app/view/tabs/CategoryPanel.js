@@ -1,42 +1,62 @@
 Ext.define('NoteKeeper.view.tabs.CategoryPanel',{
 	extend : 'NoteKeeper.view.tabs.FloatingPanel',
 	requires : [
-		'NoteKeeper.store.tabs.AttachmentStore'
+		'NoteKeeper.store.tabs.CategoryStore'
 	],
 	alias : 'widget.categoryPanel',
-	itemId : 'categoryPanel',
 	width : 200,
 	height : 150,
 	layout : {
 		type : 'vbox',
 		align : 'stretch'
 	},
-	noteId : null,
+	selectedCategoryIds : null,
 	defaultListenerScope: true,
-	items : [
-		{
-			xtype : 'grid',
-			width : 200,
-			store  : null,
-			columns : [
-				{
-					text : 'Category Name',
-					dataIndex : 'categoryName',
-					flex : 3
-				},
-				{
-					xtype : 'checkcolumn',
-					dataIndex : 'selected',
-					flex : 1
-				}
-			]
-		}
-	],
-	listeners : {
-		
+	listeners : {	
 	},
 	initComponent : function()
 	{
+		var me = this;
+		//We create the category grid inside the 'initComponent' b/c we want
+		//each category grid to have its own store; with a config based declaration,
+		//all the category grids will use ONE store since config is run only once. Below
+		//code runs every time a category panel is created.
+		this.categoryGrid = Ext.widget('grid',{
+			width : 200,
+			store  : Ext.create('NoteKeeper.store.tabs.CategoryStore'),
+			columns : [
+				{
+					text : 'Category',
+					dataIndex : 'categoryName',
+					flex : 3,
+					renderer : function( value, columnMeta, record )
+					{
+						columnMeta.style = 'background-color: ' + record.get('categoryColor');
+						return value;
+					}
+				},
+				{
+					xtype : 'checkcolumn',
+					dataIndex : 'isSelected',
+					flex : 1
+				}
+			]
+		});
+		this.categoryGrid.getStore().on('load', this.afterCategoryStoreLoad, this);
+
+		this.items = [
+			this.categoryGrid
+		];
+
 		this.callParent(arguments);
+	},
+	afterCategoryStoreLoad : function( store )
+	{
+		var selModel = this.categoryGrid.getSelectionModel();
+		var gridStore = this.categoryGrid.getStore();
+		gridStore.each( function( category ){
+			if( Ext.Array.contains( this.selectedCategoryIds, category.get('categoryId') ))
+				category.set('isSelected', true);
+		}, this);
 	}
 });
