@@ -55,7 +55,7 @@ Ext.define('NoteKeeper.controller.tabs.BaseEditorController', {
 	onEditorInit : function(e, scope)
 	{
 		//Load any initial content into the editor
-		var initContent = scope.editor.initialContent;
+		var initContent = scope.editor.content;
 		if( initContent !== null )
 			scope.getTinyMceEditor().setContent( initContent );
 	},

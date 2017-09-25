@@ -5,7 +5,7 @@ Ext.define('NoteKeeper.view.tabs.note.NoteEditor', {
 	],
 	alias : 'widget.noteEditor',
 	controller : 'noteEditorController',
-	initialContent : '<i>Enter content here. First line will be used as the title of the note.</i>',
+	content : '<i>Enter content here. First line will be used as the title of the note.</i>',
 	initComponent : function()
 	{
 		this.callParent( arguments );

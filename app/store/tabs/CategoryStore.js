@@ -2,15 +2,15 @@ Ext.define('NoteKeeper.store.tabs.CategoryStore', {
 	extend : 'Ext.data.Store',
 	fields : [
 		{
-			name : 'categoryName',
+			name : 'name',
 			type : 'string'
 		},
 		{
-			name : 'categoryId',
+			name : 'id',
 			type : 'int'
 		},
 		{
-			name : 'categoryColor',
+			name : 'color',
 			type : 'string'
 		},
 		{

@@ -2,20 +2,24 @@ Ext.define('NoteKeeper.store.tabs.JournalStore', {
 	extend : 'Ext.data.Store',
 	fields : [
 		{
-			name : 'journalName',
+			name : 'name',
 			type : 'string'
 		},
 		{
-			name : 'journalId',
+			name : 'id',
 			type : 'int'
+		},
+		{
+			name : 'isSelected',
+			type : 'boolean'
 		}
 	],
 	proxy : {
 		type : 'ajax',
-		url : '/static_files/categories.json',
+		url : '/static_files/journals.json',
 		reader : {
 			type : 'json',
-			rootProperty : 'categories'
+			rootProperty : 'journals'
 		}
 	},
 	autoLoad : true,

@@ -1,6 +1,7 @@
 Ext.define('NoteKeeper.store.tabs.AttachmentStore', {
 	extend : 'Ext.data.Store',
 	parentItemId : null,
+	noteViewModel : null,
 	fields : [
 		{
 			name : 'fileName',
@@ -26,7 +27,7 @@ Ext.define('NoteKeeper.store.tabs.AttachmentStore', {
 		var me = this;
 		me.callParent([config]);
 
-
+		//debugger;
 		console.info( me.config );
 
 		if(me.parentItemId)
@@ -34,8 +35,8 @@ Ext.define('NoteKeeper.store.tabs.AttachmentStore', {
 			//debugger;
 			me.getProxy().url = '/static_files/attachments_' + this.parentItemId + '.json';
 			me.on('load', function(store, records){ 
-			 console.info(store); 
-			 console.info(records)} )
+				//me.noteViewModel.set('attachmentCount', store.getCount() );
+			});
 			me.load();
 
 		}

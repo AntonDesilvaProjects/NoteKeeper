@@ -17,7 +17,7 @@ Ext.define('NoteKeeper.view.tabs.BaseEditor', {
 		afterrender : 'afterEditorRender'
 	},
 	height : 900,
-	initialContent : null,
+	content : null,
 	initComponent : function()
 	{
 		this.tinyMceEditorId = this.generateUniqueId();
@@ -32,8 +32,21 @@ Ext.define('NoteKeeper.view.tabs.BaseEditor', {
 	{
 		return Ext.String.format('<form><textarea id="tinyMceEditor-{0}"></textarea><form>', editorId );
 	},
-	setInitialContent : function( content )
+	setContent : function( content )
 	{
-		this.initialContent = content;
+		this.content = content;
+	},
+	getContent : function()
+	{
+		var content = "";
+		try
+		{
+			content = this.getController().getTinyMceEditor().getContent();
+		}
+		catch( error )
+		{
+			console.error( error );
+		}
+		return content;
 	}
 });

@@ -10,6 +10,7 @@ Ext.define('NoteKeeper.view.tabs.note.EditNoteWindow', {
 	height : 473,
 	width : 545,
 	autoShow : true,
+	referenceHolder : true,
 	layout : {
 		type : 'vbox'
 	},
@@ -21,8 +22,9 @@ Ext.define('NoteKeeper.view.tabs.note.EditNoteWindow', {
 			xtype : 'noteEditor',
 			width : '100%',
 			bind : {
-				initialContent : '{body}'
-			} 
+				content : '{body}'
+			},
+			reference : 'noteEditor' 
 		}
 	],
 	//Dock for the Note Editor has: attachments, category, journal, drive integration/email
@@ -32,7 +34,9 @@ Ext.define('NoteKeeper.view.tabs.note.EditNoteWindow', {
 			dock : 'bottom',
 			items : [
 				{
-					text : '1',
+					bind : {
+						text : '{attachmentCount}'
+					},
 					iconCls : 'fa fa-paperclip fa-lg buttonIcon',
 					handler : 'onAttachmentBtnClick'
 				},
@@ -45,19 +49,21 @@ Ext.define('NoteKeeper.view.tabs.note.EditNoteWindow', {
 				},
 				{
 					bind : {
-						text : '{journal}',
+						text : '{journal.journalName}',
 					},
-					iconCls : 'fa fa-book fa-lg buttonIcon'
+					iconCls : 'fa fa-book fa-lg buttonIcon',
+					handler : 'onJournalBtnClick'
 				},
 				{
-					iconCls : 'fa fa-share-alt fa-lg buttonIcon'
+					iconCls : 'fa fa-share-alt fa-lg buttonIcon',
+					handler : 'onShareBtnClick'
 				},
 				{
-					xtype : 'tbspacer',
-					width : 95
+					xtype : 'tbfill'
 				},
 				{
-					text : 'Save'
+					text : 'Save',
+					handler : 'onSaveBtnClick'
 				}
 			]
 		}
@@ -79,6 +85,7 @@ Ext.define('NoteKeeper.view.tabs.note.EditNoteWindow', {
 			this.inlineEditor = Ext.widget('editor',{
 				updateEl : true,
 				alignment: 'l-l',
+				completeOnEnter : true,
 			    autoSize: {
 			        width: 'boundEl'
 			    },
