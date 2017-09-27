@@ -11,6 +11,7 @@ Ext.define('NoteKeeper.view.tabs.SharePanel',{
 		align : 'stretch'
 	},
 	defaultListenerScope: true,
+	noteViewModel : null,
 	listeners : {	
 	},
 	initComponent : function()
@@ -59,7 +60,7 @@ Ext.define('NoteKeeper.view.tabs.SharePanel',{
 			//Prompt user for recipient email address + subject
 			//The body will be the note itself
 			Ext.widget('emailDialog',{
-				emailSubject : 'Go get Sushi'
+				noteViewModel : this.noteViewModel
 			});
 
 		}

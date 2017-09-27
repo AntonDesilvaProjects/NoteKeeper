@@ -80,7 +80,8 @@ Ext.define('NoteKeeper.controller.tabs.note.EditNoteWindowController',{
 				width : 200,
 				height : 150,
 				x : button.getX(),
-				y : button.getY() + button.getHeight()
+				y : button.getY() + button.getHeight(),
+				noteViewModel : me.editNoteWindow.getViewModel()
 			});
 		else
 			this.sharePanel.setPosition( button.getX(), button.getY() + button.getHeight() );
@@ -102,7 +103,10 @@ Ext.define('NoteKeeper.controller.tabs.note.EditNoteWindowController',{
 	onSaveBtnClick : function( btn )
 	{
 		this.syncViewModel();
-		var formattedData = this.generateSaveFormat( this.editNoteWindow.getViewModel().getData() );
+
+		console.clear();
+		console.log( this.editNoteWindow.getViewModel().get('saveFormat'));
+
 		//Make AJAX POST request
 	},
 	/*
@@ -115,20 +119,8 @@ Ext.define('NoteKeeper.controller.tabs.note.EditNoteWindowController',{
 		var editorContent = this.editNoteWindow.down('noteEditor').getContent();
 		this.editNoteWindow.getViewModel().set( 'body', editorContent );
 	},
-	/*
-		Generate a formatted JSON object to POST to server-side API.
-		Prelimiary format:
-		{
-			title : 'title',
-			body : 'content',
-			categoryIds : [],
-			journalId : []
-		}
-	*/
-	generateSaveFormat : function( rawData )
+	generateToolbarPanel : function( panelType )
 	{
-		console.log( rawData );
-		var fomattedData = {};
-		return fomattedData;
+		//
 	}
 });

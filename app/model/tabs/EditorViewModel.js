@@ -21,6 +21,30 @@ Ext.define('NoteKeeper.model.tabs.EditorViewModel',{
 			});
 
 			return categoryList;
+		},
+		/*
+			Generate a formatted JSON object to POST to server-side API.
+			Prelimiary format:
+			{
+				title : 'title',
+				body : 'content',
+				categoryIds : [],
+				journalId : 'id'
+			}
+		*/
+		saveFormat : function( get )
+		{
+			var formattedData = {};
+			formattedData.id = get('id');
+			formattedData.title = get('title');
+			formattedData.body = get('body');
+			formattedData.categoryIds = [];
+			Ext.Array.forEach( get('category'), function( category ){
+				formattedData.categoryIds.push( category.categoryId );
+			});
+			formattedData.journalId = get('journal').journalId;
+
+			return formattedData;
 		}
 	}
 });

@@ -13,10 +13,15 @@ Ext.define('NoteKeeper.view.tabs.AttachmentPanel',{
 	},
 	noteId : null,
 	defaultListenerScope: true,
-	items : [
-		{
-			xtype : 'grid',
-			store : Ext.create('NoteKeeper.store.tabs.AttachmentStore', { parentItemId : 1}),
+	noteViewModel : null,
+	listeners : {
+		
+	},
+	initComponent : function()
+	{
+		var me = this;
+		this.attachmentGrid = Ext.widget('grid',{
+			store : Ext.create('NoteKeeper.store.tabs.AttachmentStore', { parentItemId : 1}), //Change to note id
 			columns : [
 				{
 					text : 'File Name',
@@ -44,9 +49,8 @@ Ext.define('NoteKeeper.view.tabs.AttachmentPanel',{
 				deferEmptyText: false
 			},
 			height : 125
-		},
-		{
-			xtype : 'form', //Form is required for the file upload
+		});
+		this.attachmentForm = Ext.widget('form', {
 			items : [
 				{
 					xtype : 'filefield',
@@ -62,7 +66,7 @@ Ext.define('NoteKeeper.view.tabs.AttachmentPanel',{
 								success : function( form, operation)
 								{
 									//Once the file is uploaded, reload the files grid
-									fileField.up().up().down('grid').getStore().load();
+									me.attachmentGrid.getStore().load();
 								},
 								failure : function()
 								{
@@ -73,13 +77,12 @@ Ext.define('NoteKeeper.view.tabs.AttachmentPanel',{
 					}
 				}
 			]
-		}
-	],
-	listeners : {
-		
-	},
-	initComponent : function()
-	{
+		});
+
+		this.items = [
+			this.attachmentGrid,
+			this.attachmentForm
+		];
 		this.callParent(arguments);
 	}
 });

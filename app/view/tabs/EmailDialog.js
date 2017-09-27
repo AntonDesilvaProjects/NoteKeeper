@@ -2,14 +2,15 @@ Ext.define('NoteKeeper.view.tabs.EmailDialog',{
 	extend : 'Ext.window.Window',
 	alias : 'widget.emailDialog',
 	autoShow : true,
-	width : 300,
+	width : 400,
 	height : 150,
 	layout : {
 		type : 'vbox',
 		align : 'stretch'
 	},
 	padding : '10 10 10 10',
-	emailSubject : null,
+	modal : true,
+	noteViewModel : null,
 	initComponent : function()
 	{
 		var me = this;
@@ -17,20 +18,32 @@ Ext.define('NoteKeeper.view.tabs.EmailDialog',{
 			{
 				xtype : 'textfield',
 				fieldLabel : 'To',
-				itemId : 'emailTo'
+				itemId : 'emailTo',
+				emptyText : 'Enter email addresses separated by ;'
 			},
 			{
 				xtype : 'textfield',
 				fieldLabel : 'Subject',
-				itemId : 'subject',
-				text : me.emailSubject	
+				itemId : 'subject'
 			},
 			{
 				xtype :'button',
 				text : 'Send',
 				handler : function()
 				{
-					
+					var emailAdds = me.down('textfield[itemId=emailTo]').getValue().split(';');
+					var subject = me.down('textfield[itemId=subject]').getValue();
+					var formattedData = me.noteViewModel.get('saveFormat');
+
+					var payload = {
+						to : emailAdds,
+						subject : subject,
+						content : formattedData
+					};
+
+					//Make POST AJAX; Upon success close the email dialog
+
+					console.log( payload );
 				}
 			}
 		];
@@ -39,7 +52,9 @@ Ext.define('NoteKeeper.view.tabs.EmailDialog',{
 	},
 	afterEmailDialogRender : function( emailDlg )
 	{
-		this.setTitle('Email - ' + this.emailSubject );
-		this.down('textfield[itemId=subject]').setValue( this.emailSubject );
+		var me = this;
+		var noteTitle = me.noteViewModel.get('title');
+		this.setTitle('Email - ' + noteTitle );
+		this.down('textfield[itemId=subject]').setValue( noteTitle );
 	}
 });
