@@ -1,8 +1,7 @@
-Ext.define('NoteKeeper.controller.tabs.note.EditNoteWindowController',{
+Ext.define('NoteKeeper.controller.tabs.journal.EditJournalWindowController',{
 	extend : 'Ext.app.ViewController',
-	alias : 'controller.editNoteWindowController',
+	alias : 'controller.editJournalWindowController',
 	requires : [
-		'NoteKeeper.view.tabs.AttachmentPanel',
 		'NoteKeeper.view.tabs.CategoryPanel',
 		'NoteKeeper.view.tabs.SharePanel'
 	],
@@ -15,30 +14,14 @@ Ext.define('NoteKeeper.controller.tabs.note.EditNoteWindowController',{
 	},
 	init : function()
 	{
-		this.editNoteWindow = this.getView();
-		this.editNoteWindow.getInlineEditor().on('complete', this.inlineEditingComplete, this);
+		this.editJournalWindow = this.getView();
+		this.editJournalWindow.getInlineEditor().on('complete', this.inlineEditingComplete, this);
 		 
-		console.info(this.editNoteWindow)
+		console.info(this.editJournalWindow)
 	},
 	afterEditorRender : function( editor )
 	{
 		editor.getHeader().getTitle().textEl.on('dblclick', this.onEditorTitleDblClick, this );
-	},
-	onAttachmentBtnClick : function( button, e, eOpts )
-	{
-		var me = this;
-		if( !this.attachmentPanel )
-			this.attachmentPanel = Ext.widget('attachmentPanel',{
-				width : 200,
-				height : 150,
-				x : button.getX(),
-				y : button.getY() + button.getHeight(),
-				noteViewModel : me.editNoteWindow.getViewModel()
-			});
-		else
-			this.attachmentPanel.setPosition(  button.getX(), button.getY() + button.getHeight() );
-	
-		this.attachmentPanel.show();
 	},
 	onCategoryBtnClick : function( button, e , eOpts )
 	{
@@ -49,28 +32,12 @@ Ext.define('NoteKeeper.controller.tabs.note.EditNoteWindowController',{
 				height : 150,
 				x : button.getX(),
 				y : button.getY() + button.getHeight(),
-				noteViewModel : me.editNoteWindow.getViewModel()
+				noteViewModel : me.editJournalWindow.getViewModel()
 			});
 		else
 			this.categoryPanel.setPosition( button.getX(), button.getY() + button.getHeight() );
 
 		this.categoryPanel.show();
-	},
-	onJournalBtnClick : function( button, e, eOpts )
-	{
-		var me = this;
-		if( !this.journalPanel )
-			this.journalPanel = Ext.widget('journalPanel', {
-				width : 200,
-				height : 150,
-				x : button.getX(),
-				y : button.getY() + button.getHeight(),
-				noteViewModel : me.editNoteWindow.getViewModel()
-			});
-		else
-			this.journalPanel.setPosition( button.getX(), button.getY() + button.getHeight() );
-
-		this.journalPanel.show();
 	},
 	onShareBtnClick : function( button, e, eOpts )
 	{
@@ -81,7 +48,7 @@ Ext.define('NoteKeeper.controller.tabs.note.EditNoteWindowController',{
 				height : 150,
 				x : button.getX(),
 				y : button.getY() + button.getHeight(),
-				noteViewModel : me.editNoteWindow.getViewModel()
+				noteViewModel : me.editJournalWindow.getViewModel()
 			});
 		else
 			this.sharePanel.setPosition( button.getX(), button.getY() + button.getHeight() );
@@ -94,19 +61,18 @@ Ext.define('NoteKeeper.controller.tabs.note.EditNoteWindowController',{
 	*/
 	onEditorTitleDblClick : function(e, target)
 	{
-		this.editNoteWindow.getInlineEditor().startEdit( target );
+		this.editJournalWindow.getInlineEditor().startEdit( target );
 	},
 	inlineEditingComplete : function(editor, value, startValue, eOpts)
 	{
-		this.editNoteWindow.getViewModel().set('title', value);
+		this.editJournalWindow.getViewModel().set('title', value);
 	},
 	onSaveBtnClick : function( btn )
 	{
 		this.syncViewModel();
-
 		console.clear();
-		console.log( this.editNoteWindow.getViewModel().getData() );
-		console.log( this.editNoteWindow.getViewModel().get('saveFormat'));
+		console.log(this.editJournalWindow.getViewModel().getData() );
+		console.log( this.editJournalWindow.getViewModel().get('saveFormat'));
 
 		//Make AJAX POST request
 	},
@@ -117,8 +83,8 @@ Ext.define('NoteKeeper.controller.tabs.note.EditNoteWindowController',{
 	*/
 	syncViewModel : function()
 	{
-		var editorContent = this.editNoteWindow.down('noteEditor').getContent();
-		this.editNoteWindow.getViewModel().set( 'body', editorContent );
+		var editorContent = this.editJournalWindow.down('journalEditor').getContent();
+		this.editJournalWindow.getViewModel().set( 'body', editorContent );
 	},
 	generateToolbarPanel : function( panelType )
 	{

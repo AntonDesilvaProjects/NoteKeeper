@@ -58,6 +58,7 @@ Ext.define('NoteKeeper.controller.NavigationController', {
 		console.info( me.contentPanel )
 		Ext.Array.forEach( records, function( node ) {
 			console.info( node );
+			
 			if( node.get('panelId') ) //Only create panel if it has a panel id
 			{
 				var tab = {

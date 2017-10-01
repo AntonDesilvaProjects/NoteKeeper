@@ -17,6 +17,11 @@ Ext.define('NoteKeeper.model.tabs.ContentGridModel', {
 			name : 'contentType',
 			mapping : 'contentType',
 			type : 'auto'
-		}	
+		},
+		{
+			name : 'type',
+			mapping : 'type',
+			type : 'auto'
+		}		
 	]
 });

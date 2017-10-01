@@ -1,6 +1,9 @@
 Ext.define('NoteKeeper.model.tabs.EditorViewModel',{
 	extend : 'Ext.app.ViewModel',
 	alias : 'viewmodel.editorViewModel',
+	data : {
+		journal : null //This field may not always be defined
+	},
 	formulas : {
 		categoryBtnHtml : function( get )
 		{
@@ -22,28 +25,19 @@ Ext.define('NoteKeeper.model.tabs.EditorViewModel',{
 
 			return categoryList;
 		},
-		/*
-			Generate a formatted JSON object to POST to server-side API.
-			Prelimiary format:
-			{
-				title : 'title',
-				body : 'content',
-				categoryIds : [],
-				journalId : 'id'
-			}
-		*/
 		saveFormat : function( get )
 		{
 			var formattedData = {};
-			formattedData.id = get('id');
+			//formattedData.id = get('id');
 			formattedData.title = get('title');
 			formattedData.body = get('body');
 			formattedData.categoryIds = [];
 			Ext.Array.forEach( get('category'), function( category ){
 				formattedData.categoryIds.push( category.categoryId );
 			});
-			formattedData.journalId = get('journal').journalId;
-
+			formattedData.type = get('type');
+			if( formattedData.type === 'note' )
+				formattedData.journalId = get('journal').journalId;	
 			return formattedData;
 		}
 	}
