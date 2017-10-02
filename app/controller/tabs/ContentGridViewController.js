@@ -10,6 +10,9 @@ Ext.define('NoteKeeper.controller.tabs.ContentGridViewController', {
 	{
 		this.callParent(arguments);
 	},
+	/*
+		Launch the correct type of editor when a record is clicked
+	*/
 	onItemClick : function( grid, record, item, index, e, options)
 	{
 
@@ -25,5 +28,34 @@ Ext.define('NoteKeeper.controller.tabs.ContentGridViewController', {
 				data : record.getData()
 			}
 		});
+	},
+	/*
+		Display a right-click context menu if the clicked record is a 
+		journal. The context-menu provides a way to see notes of a 
+		journal
+
+		Provide history support if user wants to go back.
+	*/
+	onItemRightClick : function( grid, record, item, index, e, options )
+	{
+		var me = this;
+		if( record.get('type') === 'note')
+			return;
+
+		e.stopEvent();
+		var position = e.getXY();
+		var menu = new Ext.menu.Menu({
+	        items: [
+	            { 
+	            	text: 'View Notes', 
+	            	handler: function() {
+	            		me.getView().store.loadNotesForJournal( 1 );
+	            	} 
+	            }
+	        ]
+  		});
+		menu.showAt(position);
+
+		console.log( position );
 	}
 });

@@ -11,7 +11,10 @@ Ext.define('NoteKeeper.store.tabs.ContentGridViewStore', {
 			rootProperty : 'data'
 		}
 	},
-	//autoLoad : true
+	/*
+		At creation time, uses the passed in 'type' config
+		to load the appropriate data
+	*/
 	constructor : function( config )
 	{
 		this.type = config.type;
@@ -24,7 +27,30 @@ Ext.define('NoteKeeper.store.tabs.ContentGridViewStore', {
 			else if ( this.type === 'note' )
 				this.proxy.url = '/static_files/gridContent.json';
 			this.load();
-		}
-		
+		}	
+	},
+	/*
+		Loads all the notes for the passed in journal id
+	*/
+	loadNotesForJournal : function( journalId )
+	{
+		var me = this;
+		this.proxy.url = '/static_files/notes_for_journal.json';
+		this.proxy.extraParams = {
+			journalId : journalId
+		};
+		this.load();
+	},
+	/*
+		Loads the search results for the passed in query
+	*/
+	loadSearchResults : function( query )
+	{
+		var me = this;
+		this.proxy.url = '/static_files/search_results.json';
+		this.proxy.extraParams = {
+			query : query
+		};
+		this.load();
 	}
 });

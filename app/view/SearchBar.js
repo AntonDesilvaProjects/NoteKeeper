@@ -37,7 +37,13 @@ Ext.define('NoteKeeper.view.SearchBar', {
 			reference : 'btnSearch',
 			text : 'Search',
 			height : 32,
-			margin : '0 0 0 5'
+			margin : '0 0 0 5',
+			handler : function( btn )
+			{
+				var searchResultsTab = Ext.ComponentQuery.query('#searchResults')[0];
+				searchResultsTab.store.loadSearchResults( 1 );
+				console.log( searchResultsTab)
+			}
 		});
 
 		this.items = [

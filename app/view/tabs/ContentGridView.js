@@ -68,6 +68,7 @@ Ext.define('NoteKeeper.view.tabs.ContentGridView', {
 	controller : 'contentGridViewController',
 	autoScroll : true,
 	listeners : {
-		itemclick : 'onItemClick'
+		itemclick : 'onItemClick',
+		itemcontextmenu : 'onItemRightClick'
 	}
 });

@@ -56,22 +56,31 @@ Ext.define('NoteKeeper.controller.NavigationController', {
 	{
 		var me = this;
 		console.info( me.contentPanel )
-		Ext.Array.forEach( records, function( node ) {
+		Ext.Array.forEach( records, function( node ) 
+		{
 			console.info( node );
-			
-			if( node.get('panelId') ) //Only create panel if it has a panel id
+			var panelId = null;	
+			if( ( panelId = node.get('panelId') ) ) //Only create panel if it has a panel id
 			{
 				var tab = {
 					title : node.get('text'),
 					itemId : node.get('panelId')
 				};
 
-				if( node.get('panelId') === 'journal' || node.get('panelId') === 'note' )
+				if( panelId === 'journal' || panelId === 'note' )
 				{	
 					tab.xtype = node.get('panelClass');
 					tab.store = Ext.create('NoteKeeper.store.tabs.ContentGridViewStore',{
-						type : node.get('panelId')
+						type : panelId
 					});
+				}
+				else if( panelId === 'searchResults')
+				{
+					tab.xtype = node.get('panelClass');
+					tab.store = Ext.create('NoteKeeper.store.tabs.ContentGridViewStore',{
+						type : null
+					});
+					//tab.hidden = true;
 				}
 				else
 					tab.xtype = 'categoryStatisticTab';
