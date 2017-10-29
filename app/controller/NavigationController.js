@@ -1,6 +1,3 @@
-/*
-
-*/
 Ext.define('NoteKeeper.controller.NavigationController', {
 	extend : 'Ext.app.ViewController',
 	alias : 'controller.navController',
@@ -42,11 +39,22 @@ Ext.define('NoteKeeper.controller.NavigationController', {
 	},
 	/*
 		When a tab from the navigation panel is clicked, change the
-		active tab.
+		active tab. If the 'x' icon of a closable tab is clicked,
+		close that panel.
 	*/
 	onItemClick : function( navPanel, record, item, index, e, eOpts )
 	{
-		this.contentPanel.setActiveTab( record.get('panelId') );
+		var me = this;
+		var clickTargetDom = Ext.get( e.getTarget() ).dom;
+		var panelId = record.get('panelId');
+		if( clickTargetDom.className.includes('navigation-tree-panel-close') )
+		{
+			me.navPanel.hideNodes( true, panelId ); //Hide the closed panel
+			me.contentPanel.setActiveTab( 0 ); //Automatically select first tab
+			me.navPanel.selModel.select( 0 );
+			return;
+		}
+		me.contentPanel.setActiveTab( panelId );
 	},
 	/*
 		Generate the Tab panels based on the response returned to the
@@ -80,7 +88,6 @@ Ext.define('NoteKeeper.controller.NavigationController', {
 					tab.store = Ext.create('NoteKeeper.store.tabs.ContentGridViewStore',{
 						type : null
 					});
-					//tab.hidden = true;
 				}
 				else
 					tab.xtype = 'categoryStatisticTab';

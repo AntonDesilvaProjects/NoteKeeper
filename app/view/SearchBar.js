@@ -41,6 +41,18 @@ Ext.define('NoteKeeper.view.SearchBar', {
 			handler : function( btn )
 			{
 				var searchResultsTab = Ext.ComponentQuery.query('#searchResults')[0];
+				//var navStore = Ext.ComponentQuery.query('#navPanel')[0].store;
+				//navStore.clearFilter();
+				var navPanel = Ext.ComponentQuery.query('#navPanel')[0];
+				navPanel.hideNodes(false, searchResultsTab.panelId );
+
+				//Manually select the 'Search Results' menu item in the navigation panel so
+				//it gets highlighted
+				var navPanelSearchNode = navPanel.getStore().findRecord( 'panelId', searchResultsTab.itemId ); //Find nav panel model for Search Results items
+				navPanel.selModel.select(  navPanelSearchNode );
+
+				//Set the active item to the Search Panel tab
+				searchResultsTab.up('panel').getLayout().setActiveItem(searchResultsTab);
 				searchResultsTab.store.loadSearchResults( 1 );
 				console.log( searchResultsTab)
 			}

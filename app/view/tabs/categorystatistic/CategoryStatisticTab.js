@@ -3,12 +3,15 @@ Ext.define('NoteKeeper.view.tabs.categorystatistic.CategoryStatisticTab', {
 	requires : [
 		'NoteKeeper.view.tabs.categorystatistic.EditableCategoryGrid',
 		'NoteKeeper.store.tabs.categorystatistic.EditableCategoryGridStore',
-		'NoteKeeper.view.tabs.categorystatistic.StatisticPanel'
+		'NoteKeeper.view.tabs.categorystatistic.StatisticPanel',
+		'NoteKeeper.view.tabs.PasteUploader'
 	],
 	xtype : 'categoryStatisticTab',
 	layout : {
 		type : 'vbox'
 	},
+	autoScroll : true,
+	height : 1000,
 	items : [
 		{
 			xtype : 'editableCategoryGrid',
