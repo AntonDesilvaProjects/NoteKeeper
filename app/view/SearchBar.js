@@ -1,5 +1,8 @@
 Ext.define('NoteKeeper.view.SearchBar', {
 	extend : 'Ext.container.Container',
+	requires  :[
+		'NoteKeeper.view.SearchResultsPanel'
+	],
 	xtype : 'searchBar',
 	layout : {
 		type : 'hbox'
@@ -16,7 +19,19 @@ Ext.define('NoteKeeper.view.SearchBar', {
 			height : 30,
 			inputWrapCls: '',
     		triggerWrapCls: '', // remove default styling for div wrapping the input element and trigger button(s)
-    		fieldStyle: 'background:none' // remove the input element's background
+    		fieldStyle: 'background:none', // remove the input element's background
+    		listeners : {
+    			change : function(newValue)
+    			{
+    				if( !me.searchResultsPanel)
+	    				me.searchResultsPanel = Ext.widget('searchResultsPanel',{
+	    					x : me.txtSearchField.getX(),
+							y : me.txtSearchField.getY() + me.txtSearchField.getHeight(),
+	    				});
+	    			me.searchResultsPanel.show();
+	    			me.txtSearchField.focus();
+    			}
+    		}
 		});
 		this.btnFilter = Ext.widget('image', {
 			name : 'btnFilter',
@@ -53,7 +68,7 @@ Ext.define('NoteKeeper.view.SearchBar', {
 
 				//Set the active item to the Search Panel tab
 				searchResultsTab.up('panel').getLayout().setActiveItem(searchResultsTab);
-				searchResultsTab.store.loadSearchResults( 1 );
+				searchResultsTab.store.loadSearchResults( 1 ); //Load the tab's store with the query
 				console.log( searchResultsTab)
 			}
 		});
