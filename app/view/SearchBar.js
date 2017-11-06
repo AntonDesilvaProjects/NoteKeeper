@@ -69,6 +69,12 @@ Ext.define('NoteKeeper.view.SearchBar', {
 				//Set the active item to the Search Panel tab
 				searchResultsTab.up('panel').getLayout().setActiveItem(searchResultsTab);
 				searchResultsTab.store.loadSearchResults( 1 ); //Load the tab's store with the query
+
+				var contextToolBar = me.up('mainAppContainer').down('contextToolBar');
+				contextToolBar.updateToolBar({
+					name : searchResultsTab.itemId 
+				});
+
 				console.log( searchResultsTab)
 			}
 		});

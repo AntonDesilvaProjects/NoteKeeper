@@ -8,6 +8,7 @@ Ext.define('NoteKeeper.controller.tabs.ContentGridViewController', {
 	alias : 'controller.contentGridViewController',
 	init : function()
 	{
+		this.prevSearchQuery = undefined;
 		this.callParent(arguments);
 	},
 	/*
@@ -50,6 +51,7 @@ Ext.define('NoteKeeper.controller.tabs.ContentGridViewController', {
 	            	text: 'View Notes', 
 	            	handler: function() {
 	            		me.getView().store.loadNotesForJournal( 1 );
+	            		console.log(me.getView().store.getProxy(). );
 	            	} 
 	            }
 	        ]

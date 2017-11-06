@@ -58,7 +58,7 @@ Ext.define('NoteKeeper.view.tabs.CategoryPanel',{
 	{
 		var selModel = this.categoryGrid.getSelectionModel();
 		var gridStore = this.categoryGrid.getStore();
-		gridStore.each( function( category ){
+		gridStore.each( function( category ) {
 			if( Ext.Array.contains( this.noteViewModel.get('selectedCategoryIds') , category.get('id') ))
 				selModel.select( category );
 		}, this);

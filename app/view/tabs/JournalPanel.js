@@ -45,6 +45,8 @@ Ext.define('NoteKeeper.view.tabs.JournalPanel',{
 	},
 	afterJournalStoreLoad : function( store )
 	{
+		if( !this.noteViewModel.get('journal') )
+			return;
 		var selModel = this.journalGrid.getSelectionModel();
 		var gridStore = this.journalGrid.getStore();
 		gridStore.each( function( journal ){

@@ -12,7 +12,12 @@ Ext.define('NoteKeeper.model.tabs.EditorViewModel',{
 			Ext.Array.forEach( categories, function( category ){
 				html += Ext.String.format('<span style="background-color: {0};">{1}</span>, ', category.color, category.name );
 			});
-			html = html.substring( 0, html.length - 2 );
+			
+			if( html.length > 0 )
+				html = html.substring( 0, html.length - 2 );
+			else
+				html = 'Categories';
+
 			return html;
 		},
 		selectedCategoryIds : function( get )

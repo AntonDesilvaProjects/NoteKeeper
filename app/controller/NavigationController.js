@@ -47,6 +47,7 @@ Ext.define('NoteKeeper.controller.NavigationController', {
 		var me = this;
 		var clickTargetDom = Ext.get( e.getTarget() ).dom;
 		var panelId = record.get('panelId');
+		var contextToolBar = Ext.ComponentQuery.query('#contextToolBar')[0];
 		if( clickTargetDom.className.includes('navigation-tree-panel-close') )
 		{
 			me.navPanel.hideNodes( true, panelId ); //Hide the closed panel
@@ -55,6 +56,10 @@ Ext.define('NoteKeeper.controller.NavigationController', {
 			return;
 		}
 		me.contentPanel.setActiveTab( panelId );
+		if( contextToolBar )
+			contextToolBar.updateToolBar({
+				name : panelId 
+			});
 	},
 	/*
 		Generate the Tab panels based on the response returned to the

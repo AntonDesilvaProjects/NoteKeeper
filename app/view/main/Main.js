@@ -1,5 +1,6 @@
 Ext.define('NoteKeeper.view.main.Main', {
     extend: 'Ext.container.Container',
+    alias : 'widget.mainAppContainer',
     requires: [
         'NoteKeeper.view.main.MainController',
         'NoteKeeper.view.main.MainModel',
@@ -8,7 +9,8 @@ Ext.define('NoteKeeper.view.main.Main', {
         'NoteKeeper.view.ContentPanel',
         'NoteKeeper.view.MainContainer',
         'NoteKeeper.view.SearchBar',
-        'NoteKeeper.view.UserInfo'
+        'NoteKeeper.view.UserInfo',
+        'NoteKeeper.view.ContextToolBar'
     ],
 
     xtype: 'app-main',
@@ -44,13 +46,8 @@ Ext.define('NoteKeeper.view.main.Main', {
             ]
         },
         {
-            xtype : 'toolbar',
-            items : [
-                {
-                    xtype : 'button',
-                    text : 'New'
-                }
-            ]
+            xtype : 'contextToolBar',
+            itemId : 'contextToolBar'
         },
         {
             xtype : 'mainContainer',
