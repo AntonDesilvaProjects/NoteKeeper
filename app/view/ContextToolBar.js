@@ -33,7 +33,24 @@ Ext.define('NoteKeeper.view.ContextToolBar', {
 			iconCls : 'fa fa-arrow-left fa-lg',
 			itemId : 'btnBack',
 			hidden : true,
-			backUrl : undefined
+			handler : function( backBtn )
+			{
+				var contentPanel = me.up().down('contentPanel');
+				var activeItem = contentPanel.getActiveTab();
+				if( activeItem )
+				{
+					var store = activeItem.getStore();
+					var controller = activeItem.getController();
+					var prevSearchQuery = controller.prevSearchQuery;
+					if( prevSearchQuery )
+					{
+						store.getProxy().url = prevSearchQuery.url;
+						store.getProxy().extraParams = prevSearchQuery.extraParams;
+						store.load();
+					}
+				}
+				backBtn.hide();
+			}
         });
 
         me.items = [
@@ -57,7 +74,7 @@ Ext.define('NoteKeeper.view.ContextToolBar', {
 		var btnNew = me.getComponent('btnNew'); 
 		var btnBack = me.getComponent('btnBack');
 
-		if( context === 'journal' || context === 'note' )
+		if( context.name === 'journal' || context.name === 'note' )
 			btnNew.setVisible( true );
 		else
 			btnNew.setVisible( false );

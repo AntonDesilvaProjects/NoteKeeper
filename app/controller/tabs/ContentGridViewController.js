@@ -49,9 +49,18 @@ Ext.define('NoteKeeper.controller.tabs.ContentGridViewController', {
 	        items: [
 	            { 
 	            	text: 'View Notes', 
-	            	handler: function() {
+	            	handler: function() 
+	            	{	
+	            		var contentGridProxy = me.getView().store.getProxy();
+	            		me.prevSearchQuery = {};
+	            		me.prevSearchQuery.url = contentGridProxy.url;
+	            		me.prevSearchQuery.params = contentGridProxy.extraParams;
+
+	            		console.log( me.prevSearchQuery );
 	            		me.getView().store.loadNotesForJournal( 1 );
-	            		console.log(me.getView().store.getProxy(). );
+
+	            		//Display the 'back' button
+	            		Ext.ComponentQuery.query('#btnBack')[0].show(); //FIX !!
 	            	} 
 	            }
 	        ]
