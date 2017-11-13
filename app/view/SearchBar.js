@@ -1,7 +1,8 @@
 Ext.define('NoteKeeper.view.SearchBar', {
 	extend : 'Ext.container.Container',
 	requires  :[
-		'NoteKeeper.view.SearchResultsPanel'
+		'NoteKeeper.view.SearchResultsPanel',
+		'NoteKeeper.view.FilterPanel'
 	],
 	xtype : 'searchBar',
 	layout : {
@@ -33,6 +34,7 @@ Ext.define('NoteKeeper.view.SearchBar', {
     			}
     		}
 		});
+
 		this.btnFilter = Ext.widget('image', {
 			name : 'btnFilter',
 			reference : 'btnFilter',
@@ -41,12 +43,13 @@ Ext.define('NoteKeeper.view.SearchBar', {
 			width : 30,
 			style : 'cursor:pointer',
 			listeners : {
-				afterrender : function( c )
+				afterrender : function( filterElement )
 				{
-					c.el.on('click', function(){ alert('clicked!'); });
+					filterElement.el.on('click', me.onFilterBtnClick, me);
 				}
 			}
 		});
+
 		this.btnSearch = Ext.widget('button', {
 			name : 'btnSearch',
 			reference : 'btnSearch',
@@ -97,5 +100,18 @@ Ext.define('NoteKeeper.view.SearchBar', {
 		];
 
 		this.callParent( arguments );
+	},
+	onFilterBtnClick : function( filterBtn )
+	{
+		var me = this;
+		if( !me.filterPanel)
+	    	me.filterPanel = Ext.widget('filterPanel',{
+	    		x : me.txtSearchField.getX(),
+				y : me.txtSearchField.getY() + me.txtSearchField.getHeight(),
+				width : me.txtSearchField.width + 30,
+				height : 350
+	    	});
+	    me.filterPanel.show();
+	    me.txtSearchField.focus();
 	}
 });

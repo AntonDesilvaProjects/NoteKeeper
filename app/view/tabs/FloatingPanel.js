@@ -110,9 +110,18 @@ Ext.define('NoteKeeper.view.tabs.FloatingPanel',{
 	},
 	onMouseDown : function( e, t, eOpts )
 	{
-		//Check if the clicked region is part of the floating panel
-		//If not, hide the floating panel
-		if( Ext.isEmpty( Ext.get(t).up('div[class*=floatingPanel') ) )
+		/*
+			Check if the clicked region is part of the floating panel by seeing if one of the below classes are 
+			present:
+				floatingPanel - used for the actual floating panel
+
+				floatingPanelComponent - used for any component within the floating panel that may create its
+				own floating containers(i.e. combo boxes, date pickers, etc). We don't want the floating panel to
+				hide if user clicks on these smaller floating panels.
+
+			If the clicked region does not have either class, hide the floating panel.
+		*/
+		if( Ext.isEmpty( Ext.get(t).up('div[class*=floatingPanel],div[class*=floatingPanelComponent]') ) )
 		{
 			this.close(); //This will remove the mousedown event as well
 		}
